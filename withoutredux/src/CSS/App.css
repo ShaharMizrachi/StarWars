@@ -1,0 +1,24 @@
+body {
+}
+.grid-left {
+  grid-area: left;
+}
+.center {
+  grid-area: center;
+  grid-column: 4 / 7;
+}
+
+.grid-center {
+  grid-area: center;
+  transform: translate(-10px, -10px);
+}
+
+.grid-right {
+  grid-area: right;
+}
+
+.logo {
+  transform: translate(540px, 10px);
+  /* display: grid;
+  grid-column-end: 10; */
+}

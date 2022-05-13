@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Character from "./Character.js";
+import "../CSS/Charecters.css";
 
 import { allCharacters } from "../Api/api.js";
 import ImageList from "@mui/material/ImageList";
@@ -16,13 +17,16 @@ import Button from "@mui/material/Button";
 const Charecters = () => {
   const [characters, setCharacters] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedId, setSelectedId] = useState(-1);
 
-  const handleClick = (event) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setSelectedId(id);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setSelectedId(-1);
   };
   const test = (id) => {
     console.log(id);
@@ -39,10 +43,6 @@ const Charecters = () => {
     setCharacters(data);
   };
 
-  useEffect(() => {
-    console.log(characters);
-  });
-
   const nullCase = () => {
     // why i have this can i do it in other why?
     return <div>test</div>;
@@ -50,9 +50,7 @@ const Charecters = () => {
 
   return (
     <div>
-      {characters == null ? (
-        nullCase
-      ) : (
+      {characters == null ? null : (
         <ImageList className="row col-10 offset-1">
           <ImageListItem key="Subheader" cols={3}>
             <ListSubheader component="div" />
@@ -65,25 +63,30 @@ const Charecters = () => {
                   title={item.name}
                   subtitle={item.species}
                   actionIcon={
-                    <IconButton onClick={handleClick} sx={{ color: "rgba(255, 255, 255, 0.54)" }} aria-label={`info about ${item.name}`}>
+                    <IconButton onClick={(e) => handleClick(e, item.id)} sx={{ color: "rgba(255, 255, 255, 0.54)" }} aria-label={`info about ${item.name}`}>
                       <InfoIcon />
                     </IconButton>
                   }
                 />
-                <Popover
-                  id={id}
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                >
-                  <div className="row col-5 ">
-                    <Character className={item.id} />
-                  </div>
-                </Popover>
+                <div>
+                  {selectedId === item.id && (
+                    <Popover
+                      className="row col-2"
+                      id={id}
+                      open={open}
+                      anchorEl={anchorEl}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                    >
+                      <div className="row col-5 ">
+                        <Character idClicked={item.id} />
+                      </div>
+                    </Popover>
+                  )}
+                </div>
               </div>
             </ImageListItem>
           ))}

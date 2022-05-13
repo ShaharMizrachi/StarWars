@@ -16,12 +16,6 @@ export const singleCharacter = axios.create({
 });
 
 //"planets","starships""vehicles""species""films"
-export const AllData = async (mydata) => {
-  try {
-    axios.create({
-      baseURL: `https://swapi.dev/api/${mydata}/`,
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
+export const AllData = axios.create({
+  baseURL: `https://swapi.dev/api/`,
+});

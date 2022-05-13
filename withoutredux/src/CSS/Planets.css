@@ -1,0 +1,25 @@
+.shahar {
+  margin-top: 2%;
+  column-count: 1;
+  color: #9d8b2f;
+
+  /* Properties below are optional: */
+  -webkit-column-gap: 50px; /* Chrome/Opera, Safari */
+  column-gap: 2px;
+  display: inline-block;
+}
+
+li {
+  /* list-style: decimal-leading-zero; */
+  font-size: x-large;
+  margin: 0 0 0 2em;
+  font-weight: bold;
+}
+
+li span {
+  font-size: large;
+  font-weight: bold;
+}
+ul {
+  white-space: nowrap;
+}

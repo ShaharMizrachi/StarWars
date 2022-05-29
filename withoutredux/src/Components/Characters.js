@@ -43,14 +43,15 @@ const Charecters = () => {
     setCharacters(data);
   };
 
-  const nullCase = () => {
-    // why i have this can i do it in other why?
-    return <div>test</div>;
-  };
-
   return (
     <div>
-      {characters == null ? null : (
+      {characters == null ? (
+        <div className="row col-4 offset-4">
+          <iframe src="https://giphy.com/embed/58Y1tQU8AAhna" width="480" height="349" frameBorder="0" class="giphy-embed" allowFullScreen>
+            Loading
+          </iframe>
+        </div>
+      ) : (
         <ImageList className="row col-10 offset-1">
           <ImageListItem key="Subheader" cols={3}>
             <ListSubheader component="div" />

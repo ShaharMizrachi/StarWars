@@ -15,11 +15,10 @@ const Planets = () => {
   const [planets, Setplanets] = useState(null);
   const [tableTitles, setTableTitles] = useState("");
 
-  const planetsData = async () => {
-    const planetsJson = await AllData.get("/planets").then((d) => {
+  const planetsData = () => {
+    AllData.get("/planets").then((d) => {
       Setplanets(d.data.results);
     });
-    console.log(planetsJson); // over here i'm getting undefind, why ? same problam as before.
   };
   useEffect(() => {
     planetsData();
@@ -27,14 +26,20 @@ const Planets = () => {
 
   return (
     <div>
-      <div className="row col-12 mt-4">
-        <iframe src="https://giphy.com/embed/spp5a0cmE833VtG9iz" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-      </div>
-      {planets == null
-        ? null
-        : planets.map((planet) => {
-            return (
-              <div className="shahar">
+      {planets == null ? (
+        <div className="row col-4 offset-4">
+          <iframe src="https://giphy.com/embed/58Y1tQU8AAhna" width="480" height="349" frameBorder="0" class="giphy-embed" allowFullScreen>
+            Loading
+          </iframe>
+        </div>
+      ) : (
+        <React.Fragment>
+          <div className="row col-4 offset-4 mt-4 mb-5">
+            <iframe src="https://giphy.com/embed/spp5a0cmE833VtG9iz" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+          </div>
+          <div className="row">
+            {planets.map((planet) => (
+              <div className="rounded-list col-2 offset-1">
                 <ol>
                   <li>
                     <span>Name: {planet.name}</span>
@@ -53,8 +58,10 @@ const Planets = () => {
                   </li>
                 </ol>
               </div>
-            );
-          })}
+            ))}
+          </div>
+        </React.Fragment>
+      )}
       ;
     </div>
   );
